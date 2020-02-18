@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import '../App.css'
 import 'axios'
 import Axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 const AdNewCourse = (e) => {
     const[state,setState]= useState({
@@ -118,16 +118,7 @@ return (
     }
     else{
         return(
-    <div>
-         <div className='bg-success'>
-            <h1 className='my-2'>
-                New Course added<br/>
-                <Link className='my-2' to='/AdCourse'>
-                 Adcourse
-                </Link>
-            </h1>
-         </div>
-    </div>
+          <Redirect to='/AdCourse'/>
    
             )
     }

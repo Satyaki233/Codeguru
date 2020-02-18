@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 const axios = require('axios');
 
 const AdCourse = (e) => {
     const [course,setCourse]= useState([]);
-
+    const [drop, setDrop ] = useState(false)
     
 
 
@@ -21,7 +21,9 @@ const AdCourse = (e) => {
                setCourse( course=> data);
            })
     },[])
-    return (
+
+    if(!drop)
+    {return (
         <div className='container-fluid'>
              <div><Link className='btn btn-primary my-3' to='/AdNewCourse'>Add New course</Link></div> 
              <div className='mx-auto' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '95vw', height:'100vh' }}>
@@ -60,7 +62,9 @@ const AdCourse = (e) => {
                     axios.delete(`${process.env.REACT_APP_API_KEY}/course/${items.id}`)
                     
                     .then(data =>{
-                        console.log(data)
+                     alert(`you will be redirected to Home page .`) 
+                     alert(`login again to see adcourse`)
+                      setDrop(drop=>true)
                     })
                     .catch(err=>{
                         console.log(err)
@@ -77,7 +81,12 @@ const AdCourse = (e) => {
             </table>
             </div>
                     </div>
-    )
+    )}
+    else{
+        return(
+            <Redirect to='/Home'/>    
+            )
+    }
 }
 
 export default AdCourse

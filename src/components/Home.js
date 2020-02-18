@@ -87,7 +87,7 @@ const Home = (e)=> {
                      <div className='card-header bg-warning'>
                              {pics.title}
                           </div>
-                     <img className="card-img-top" src={`${process.env.REACT_APP_API_KEY}/${pics.image}`} alt="Card image"/>
+                     <img className="card-img-top" src={`${process.env.REACT_APP_API_KEY}/${pics.image}`} style={{height:'200px'}} alt="Card image"/>
                          
                           <div className='card-body'>
                               < p>${pics.price} </p>

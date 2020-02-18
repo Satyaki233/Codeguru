@@ -15,7 +15,7 @@ const AdminUser = (props) => {
      }, [])
     return (
         
-        <div className='container' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
+        <div className='container my-2' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
                  <h2>Total user:{user.length}</h2>
             <table class="table">
             <thead className='bg-dark text-white'>

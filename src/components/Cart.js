@@ -1,10 +1,11 @@
 import React,{useEffect,useState} from 'react'
+import { Redirect } from 'react-router-dom';
 
 const Cart = () => {
 	
 	var i=0;
 	const [cart,setCart] = useState([]);
-	const [count,setCount] =useState(1);
+	
 
 	cart.map(items=>{
 		i=i+items.price;
@@ -31,8 +32,7 @@ const Cart = () => {
 	  
 	},[])
 
-
-	return (
+   return (
 		<div className='container-fluid' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
 	      <table class="table">
   <thead className='bg-dark text-white'>
@@ -74,7 +74,8 @@ const Cart = () => {
 			   })
 		  }).then(res => res.json(res))
 		  .then(data =>{
-			  console.log(data)
+			//   setDrop( drop => true)
+			window.location.reload(false);
 		  })
 		
 	  }}
@@ -94,6 +95,7 @@ const Cart = () => {
 		</h2>
 		</div>
 	)
+	
 }
 
 export default Cart;

@@ -9,7 +9,7 @@ const Course = (props) => {
 
     useEffect(()=>{
         const picsId = props.match.params.id
-        console.log(picsId);
+        
         axios.get(`http://localhost:8080/course/${picsId}`)
         .then(res =>{ 
         
@@ -36,7 +36,8 @@ const Course = (props) => {
                  <div className='col-sm-6'>                     
                    <img  
                    className='courseImg' 
-                   src={`http://localhost:8080/${course.image}`}/>
+                   src={`http://localhost:8080/${course.image}`}
+                   style={{height:'200px',width:'300px'}}/>
                  </div>
                  <div className='col-sm-6'>                     
                     <h1>Price:${course.price}</h1><br/>
@@ -79,7 +80,7 @@ const Course = (props) => {
     )}
     else{
         return(
-            <Redirect to='/Cart'/>
+            <Redirect to='/Home'/>
         )
     }
 }

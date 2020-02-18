@@ -46,7 +46,7 @@ import AdStatus from '../Admin/AdStatus'
         return (
             <div>
               <BrowserRouter>
-               <Layout title='Admin Panel' describtion='Only for admin user' children='bg-success'>
+               <Layout title='Admin Panel' describtion='Only for admin user' >
                      <p>This panel is desinged to customise the client website</p>
                </Layout>    
                <AdMenu/>
