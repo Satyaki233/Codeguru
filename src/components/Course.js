@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 import axios from 'axios';
 import '../App.css'
 const Course = (props) => {
     const [course , setCourse ] = useState({});
+    const [add,setAdd] = useState(false);
     
 
     useEffect(()=>{
@@ -17,8 +18,10 @@ const Course = (props) => {
     })
      },[])
  
-    
-    return (
+    if(!add)
+        
+        {
+            return (
         
     
         <div>
@@ -53,6 +56,9 @@ const Course = (props) => {
                           
                            if(data==='already carted'){
                                alert(`${data}`)
+                           }else{
+                               alert(`course hass been added`)
+                               setAdd( add => true );
                            }
                           
                           })
@@ -70,7 +76,12 @@ const Course = (props) => {
            
          
         </div>
-    )
+    )}
+    else{
+        return(
+            <Redirect to='/Cart'/>
+        )
+    }
 }
 
 export default Course;

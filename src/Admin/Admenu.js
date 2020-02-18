@@ -13,7 +13,7 @@ const isActive =(history,path)=>{
 
 const Admenu = ({history}) => {
     return (
-        <div className=''>
+        <div className='container'>
              <ul className='nav nav-tab bg-warning '>
                <li className='col-3 nav-items'>
                    <Link className='nav-link' style={isActive(history,'/AdUser')} to='/AdUser' >Aduser</Link>

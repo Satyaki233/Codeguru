@@ -40,7 +40,7 @@ const Cart = () => {
       
       <th scope="col">Title</th>
       <th scope="col">Price</th>
-      <th scope="col">Number</th>
+      
 	  <th scope="col">Drop</th>
     </tr>
   </thead>
@@ -51,7 +51,7 @@ const Cart = () => {
 		 
 	  <td>{items.title}</td>
 	  <td>${items.price}</td>
-	  <td>
+	  {/* <td>
 		  <button 
 		  className='mr-1'
 		//   onClick={()=>{setCount(count +1)}} 
@@ -61,8 +61,24 @@ const Cart = () => {
 		  className='ml-1'
 		//   onClick={()=>{setCount(count -1)}}
 		  >-</button>
-	  </td>
-	  <td><button className='btn btn-danger'>Drop</button></td>
+	  </td> */}
+	  <td><button 
+	  className='btn btn-danger'
+	  onClick={(e)=>{
+		const user1 = localStorage.getItem('info-id')
+		fetch(`${process.env.REACT_APP_API_KEY}/Cart/delete/${items.courseid}`,{
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({
+			   userid: user1
+			   })
+		  }).then(res => res.json(res))
+		  .then(data =>{
+			  console.log(data)
+		  })
+		
+	  }}
+	  >Drop</button></td>
 		</tr>
 		
 	   

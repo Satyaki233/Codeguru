@@ -5,6 +5,7 @@ import AdMenu from '../Admin/Admenu'
 import AdCourse from '../Admin/AdCourse'
 import Layout from './Layout'
 import AdNewCourse from '../Admin/AdNewCourse'
+import AdStatus from '../Admin/AdStatus'
 
  const Admin = (props) => {
     
@@ -55,7 +56,7 @@ import AdNewCourse from '../Admin/AdNewCourse'
                     <Route path='/AdNewCourse' exact component={AdNewCourse} />
 
                  </Switch>
-               
+                 <AdStatus/>
               
               </BrowserRouter>
             </div>
@@ -64,7 +65,11 @@ import AdNewCourse from '../Admin/AdNewCourse'
     else{
         return(
            <div>
-               Npot admin
+              <div className='container bg-danger text-white mt-2'>
+                     <h1>
+                         Admin Permission Not Granted
+                     </h1>
+              </div>
            </div>
         )
     }

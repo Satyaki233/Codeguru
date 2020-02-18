@@ -1,8 +1,15 @@
 import React,{useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+const axios = require('axios');
 
-const AdCourse = () => {
+const AdCourse = (e) => {
     const [course,setCourse]= useState([]);
+
+    
+
+
+
+
     useEffect(()=>{
            fetch(`${process.env.REACT_APP_API_KEY}/course`,{
                methode:'GET',
@@ -28,7 +35,8 @@ const AdCourse = () => {
                 <th scope="col-3">price</th>
                 <th scope='col-3'>description</th>
                 <th scope='col-3'>image</th>
-                <th scope='col-3'>Update</th>
+                <th scope='col-3'>Delete</th>
+                <th scope='col-3'>Upadte</th>
                 </tr>
             </thead>
             {
@@ -42,7 +50,24 @@ const AdCourse = () => {
                 <td>${items.price}</td>
                 <td><img className='img-thumbnail' src={`${process.env.REACT_APP_API_KEY}/${items.image}`} alt='pic'/></td>
                 <td>{items.describtion}</td>
-                <td><button className='btn btn-danger'>Edit</button></td>
+                <td><button
+                 className='btn btn-danger'
+                 onClick={(e)=>{
+                    // return fetch(`${process.env.REACT_APP_API_KEY}/course/${items.id}`,{
+                    // methode:"delete"                    
+
+                    // })
+                    axios.delete(`${process.env.REACT_APP_API_KEY}/course/${items.id}`)
+                    
+                    .then(data =>{
+                        console.log(data)
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                 }}
+                  >Drop</button></td>
+                  <td><button className='btn btn-warning' >Edit</button></td>
                     </tr>
                 
                 </tbody>

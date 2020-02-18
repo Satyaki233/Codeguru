@@ -14,8 +14,9 @@ const AdminUser = (props) => {
         })
      }, [])
     return (
+        
         <div className='container' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
-                
+                 <h2>Total user:{user.length}</h2>
             <table class="table">
             <thead className='bg-dark text-white'>
                 <tr>
@@ -24,7 +25,7 @@ const AdminUser = (props) => {
                 <th scope="col-3">Username</th>
                 <th scope="col-3">email</th>
                 <th scope="col-3">joined</th>
-                <th scope='col-3'>edit</th>
+                <th scope='col-3'>send emails</th>
                 </tr>
             </thead>
             {
@@ -36,7 +37,7 @@ const AdminUser = (props) => {
                 <td>{items.username}</td>
                 <td>{items.email}</td>
                 <td>{items.joined}</td>
-                <td><button className='btn btn-danger'>edit</button></td>
+                <td><button className='btn btn-danger'>write</button></td>
                     </tr>
                 
                 </tbody>

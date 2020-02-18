@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import '../App.css'
 import 'axios'
 import Axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const AdNewCourse = (e) => {
     const[state,setState]= useState({
@@ -12,7 +13,7 @@ const AdNewCourse = (e) => {
         describtion:''
     })
 
-    
+    const [add ,setAdd ] = useState(false);
 
 
 
@@ -35,6 +36,7 @@ const AdNewCourse = (e) => {
         .then(res => res.json(res))
         .then(data=>{
             console.log(data)
+            setAdd( add => true)
         })
         .catch(err=>{
             console.log(err)
@@ -43,7 +45,9 @@ const AdNewCourse = (e) => {
 
         
     }
-    return (
+
+    if(!add){
+return (
         <div>
             <form className='formlayout mx-auto' encType='multipart/form-data'>
             <div class="form-group">
@@ -111,6 +115,23 @@ const AdNewCourse = (e) => {
         </div>
         
     )
+    }
+    else{
+        return(
+    <div>
+         <div className='bg-success'>
+            <h1 className='my-2'>
+                New Course added<br/>
+                <Link className='my-2' to='/AdCourse'>
+                 Adcourse
+                </Link>
+            </h1>
+         </div>
+    </div>
+   
+            )
+    }
+    
 }
 
 export default AdNewCourse

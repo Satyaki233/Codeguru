@@ -40,7 +40,7 @@ const Home = (e)=> {
       const onSerach =(e)=>{
          
           
-          // console.log(pic[0].title.toLowerCase())
+         
              
             
               const filtercourse = pic.filter(pics =>{
@@ -77,7 +77,7 @@ const Home = (e)=> {
 
 
             <ul className='container-fluid' >
-            <div className='whole-body' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
+            <div className='whole-body py-2' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
               {search.map(pics =>(
                 <Fragment className='row d-flex flex-column my-2'>
 
@@ -90,7 +90,7 @@ const Home = (e)=> {
                      <img className="card-img-top" src={`${process.env.REACT_APP_API_KEY}/${pics.image}`} alt="Card image"/>
                          
                           <div className='card-body'>
-                              < p>{pics.price} </p>
+                              < p>${pics.price} </p>
                               <p>{pics.intro}</p>
                               <Link className='btn btn-info'  to={`/course/${pics.id}`}>
                                  See course
