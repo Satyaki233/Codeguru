@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PaypalBtn from './PaypalBtn'
 import axios from 'axios'
 import DropIn from 'braintree-web-drop-in-react'
@@ -59,7 +59,7 @@ const Cart = () => {
 			  
 		   }) .catch(err =>{
 			  
-			    setData({...data,error:err})
+			    setData({...data,error:err.message})
 			})
 			console.log(data.error)
 	},[])
@@ -83,7 +83,7 @@ const Cart = () => {
 		.then(data =>{
 			// console.log(data)
 			nonce = data.nonce;
-			// console.log(nonce)
+			console.log(nonce)
 			// console.log(i)
             fetch(`${process.env.REACT_APP_API_KEY}/Braintree/paymentProcess/${user}`,{
 				method: 'POST',
@@ -95,11 +95,13 @@ const Cart = () => {
 			}).then(res=>res.json(res))
 			.then(data=>{
 				console.log(data)
+			    setData({...data,success:data.success})
 			})
             .catch(err =>{
 				console.log(err)
 			})
-
+           
+			
 		})
 		.catch(err =>{
 			setData({...data,error:err.message})
@@ -107,8 +109,59 @@ const Cart = () => {
 		})
 		
 	}
+	if(data.success){
+		fetch(`${process.env.REACT_APP_API_KEY}/Cart/emptyCart/${user}`,{
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body:JSON.stringify({
+				amount:i
+			})
+		}).then(res=>res.json(res))
+		.then(data=>{
+			console.log(data)
+			
+		})
+		.catch(err => {
+			console.log(err)
+		})
+		
+	}
 
-	
+
+	const emptyCart = () =>{
+			// console.log(i)
+			if(cart.length >0 ){
+				return(
+					<div>
+						<button 
+						className='btn btn-danger'
+						onClick={()=>{
+                          fetch(`${process.env.REACT_APP_API_KEY}/Cart/emptyCart/${user}`,{
+							method: 'POST',
+							headers: {'Content-Type': 'application/json'},
+							body:JSON.stringify({
+								amount:i
+							})
+						}).then(res=>res.json(res))
+						.then(data=>{
+							console.log(data)
+							window.location.reload(false);
+						})
+						.catch(err => {
+							console.log(err)
+						})
+						}}>
+							 Clear cart
+						</button>
+					</div>
+				)
+			}else{
+				return null
+			}
+           
+	}
+
+	 
 
 	const showDropIn=()=>{
 		
@@ -116,9 +169,12 @@ const Cart = () => {
 			return(
 				<div onBlur={()=>{setData({...data,error:''})}} 
 				className='mx-auto'
-				style={{width:'400px'}}>
+				style={{width:'300px'}}>
 				  <DropIn options={{
-					  authorization:data.clientToken
+					  authorization:data.clientToken,
+					  paypal:{
+						  flow :"vault"
+					  }
 				  }} onInstance={instance =>(data.instance = instance)}/>
 				  <button 
 				  className='btn btn-success' 
@@ -135,11 +191,34 @@ const Cart = () => {
 
 	console.log(`error :---${data.error}`)
 
+
+	if(cart.length === 0){
+		return(
+			<div className='container my-2 alert alert-danger'>
+				Your Cart corrently empty Now<br/>
+				Please visit <Link to='/Home' >Home</Link>
+			</div>
+		)
+	}
+	if(data.success === true){
+		return(
+			<div className='container my-2 alert alert-success'>
+				 Your payment Was Successfull.<br/>
+				 Please vist <Link to='/Home'>Home</Link> for more shopping.<br/>
+				 Else visit Dash. 
+			</div>
+		)
+	}
+
    return (
+	  
+	  
 		<div className='container-fluid' style={{ overflow : 'scroll' , border:' 5px solid black' ,width : '90vw', height:'100vh' }} >
-	      <table class="table">
-  <thead className='bg-dark text-white'>
-    <tr>
+	   
+		 
+		  <table class="table">
+    <thead className='bg-dark text-white'>
+     <tr>
       
       <th scope="col">Title</th>
       <th scope="col">Price</th>
@@ -196,9 +275,10 @@ const Cart = () => {
 		   i
 	   }
 		</h2>
-		<div>
+	    {emptyCart()}
+		{/* <div>
 			<PaypalBtn total={i} />
-		</div>
+		</div> */}
          <div>
 			 {showError()}
 			 {showDropIn()}
