@@ -109,24 +109,7 @@ const Cart = () => {
 		})
 		
 	}
-	if(data.success){
-		fetch(`${process.env.REACT_APP_API_KEY}/Cart/emptyCart/${user}`,{
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body:JSON.stringify({
-				amount:i
-			})
-		}).then(res=>res.json(res))
-		.then(data=>{
-			console.log(data)
-			
-		})
-		.catch(err => {
-			console.log(err)
-		})
-		
-	}
-
+	
 
 	const emptyCart = () =>{
 			// console.log(i)
@@ -173,7 +156,9 @@ const Cart = () => {
 				  <DropIn options={{
 					  authorization:data.clientToken,
 					  paypal:{
-						  flow :"vault"
+						flow: 'checkout',
+						amount: i,
+						currency: 'USD'
 					  }
 				  }} onInstance={instance =>(data.instance = instance)}/>
 				  <button 
@@ -201,6 +186,21 @@ const Cart = () => {
 		)
 	}
 	if(data.success === true){
+		fetch(`${process.env.REACT_APP_API_KEY}/Cart/Checkout/${user}`,{
+			method:'POST',
+			headers:{'Content-Type':'application/json'},
+			body:JSON.stringify({
+				amount:i
+			})
+		})
+		.then(res=>res.json(res))
+		.then(data=>{
+			console.log('successfully stored')
+		})
+		.catch(err=>{
+			console.log(err)
+		})
+
 		return(
 			<div className='container my-2 alert alert-success'>
 				 Your payment Was Successfull.<br/>
@@ -209,6 +209,7 @@ const Cart = () => {
 			</div>
 		)
 	}
+	
 
    return (
 	  

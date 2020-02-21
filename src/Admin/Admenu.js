@@ -13,7 +13,7 @@ const isActive =(history,path)=>{
 
 const Admenu = ({history}) => {
     return (
-        <div className='container'>
+        <div className='container-fluid' style={{width:'94vw'}}>
              <ul className='nav nav-tab bg-warning '>
                <li className='col-3 nav-items'>
                    <Link className='nav-link' style={isActive(history,'/AdUser')} to='/AdUser' >Aduser</Link>
@@ -21,6 +21,9 @@ const Admenu = ({history}) => {
                
                <li className='col-3 nav-items'>
                    <Link className='nav-link' style={isActive(history,'/AdCourse')} to='/AdCourse'>AdCourse</Link>
+               </li>
+               <li className='col-3 nav-items'>
+                   <Link className='nav-link' style={isActive(history,'/AdOrder')} to='/AdOrder'>AdOrder</Link>
                </li>
                </ul>
         </div>

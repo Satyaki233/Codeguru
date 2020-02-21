@@ -6,7 +6,7 @@ import AdCourse from '../Admin/AdCourse'
 import Layout from './Layout'
 import AdNewCourse from '../Admin/AdNewCourse'
 import AdStatus from '../Admin/AdStatus'
-
+import AdOrder from '../Admin/AdOrder'
  const Admin = (props) => {
     
     const [admin , setAdmin] = useState(false);
@@ -54,6 +54,7 @@ import AdStatus from '../Admin/AdStatus'
                     <Route path='/AdUser' exact component={AdminUser} />
                     <Route path='/AdCourse' exact component={AdCourse} />
                     <Route path='/AdNewCourse' exact component={AdNewCourse} />
+                    <Route path='/AdOrder' exact component={AdOrder} />
 
                  </Switch>
                  <AdStatus/>
