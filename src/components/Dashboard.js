@@ -80,7 +80,7 @@ import {Link,Redirect} from 'react-router-dom'
             <h1>Username : {user}</h1><br/>
             <h4>Email :{email}</h4>
             <Link className='btn btn-dark my-2' to='/Bio'>Bio Data</Link><br/>
-            <Link className='btn btn-dark my-2' to='/Docs'>Docs</Link>
+            <Link className='btn btn-dark my-2' to='/Docs'>Docs</Link><br/>
             <Link className='btn btn-dark my-2' to='/Feeds'>Feedbacks</Link>
             </div>
            <div className='col'>

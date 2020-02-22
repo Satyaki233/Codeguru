@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../App.css'
 import { Link } from 'react-router-dom'
 
@@ -7,13 +7,28 @@ const Feeds = () => {
     const username = localStorage.getItem('info-name')
     const email = localStorage.getItem('info-email')
     const [state,setState] = useState({
-        feeds:'',
-        submit:false
+        feeds:'',       
+        submit:false,
+        allFeeds:[]
     })
 
-
+  useEffect(()=>{
+      fetch(`${process.env.REACT_APP_API_KEY}/Feeds`,{
+          method:'GET',
+          headers:{'Content-Type':'application/json'}
+      })
+      .then(res=>res.json(res))
+      .then(data=>{
+          console.log(data)
+          setState({...state,allFeeds:data})
+      })
+      .catch(err=>{console.log(err)})
+  },[])
 
     const onSubmit=(e)=>{
+        if(state.feeds === ''){
+            return alert('please fill the form')
+        }
       e.preventDefault()
       fetch(`${process.env.REACT_APP_API_KEY}/Feeds/${id}`,{
           method:'POST',
@@ -27,8 +42,9 @@ const Feeds = () => {
       })
       .then(res=>res.json(res))
       .then(data=>{
-          console.log(data)
+          
          setState({...state,submit:true})
+         window.location.reload(false)
 
       })
       .catch(err=>{
@@ -37,18 +53,15 @@ const Feeds = () => {
     }
 
 
-    if(state.submit){
-        return(
-            <div className='alert alert-success my-2 mx-auto'>
-                 Your feedback Has been recived.
-                 please visit <Link to='/Home'>Home</Link> home for more shopping
-            </div>
-        )
-    }
+   
     return (
         <div className='container'>
+             <div className='alert alert-warning container'>    
+                  Please give your comments about your experience...It will help us to make the website much better..
+             </div>
              <form className=' bg-dark text-white' style={{margin:'20px',padding:'20px'}}>
                  <div className='form-group'>
+                    <h3>username:{username}</h3>
                  <label><h1>Feeds:</h1></label><br/>
                  <textarea
                  rows="4"
@@ -70,6 +83,26 @@ const Feeds = () => {
                 </button>
                 
              </form>
+             <div  className='mx-auto' style={{display:'block',width:'90vw'}}>
+                 {
+                     state.allFeeds.map(items=>(
+                         <div className='card bg-dark text-white my-2'>
+                            <div className='card-body'>
+                                <h4 className='card-title'>
+                                {items.username}
+                                </h4>
+                                <p className='card-text' >
+                                {items.feeds}
+                                </p>
+                            </div>                           
+                             
+                             <br/>
+                             
+                         </div>   
+                     ))
+                 }
+             </div>
+              
         </div>
     )
 }
