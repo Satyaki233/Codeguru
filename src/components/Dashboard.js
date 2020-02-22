@@ -16,7 +16,7 @@ import {Link,Redirect} from 'react-router-dom'
             headers:{'Content-Type':'application/json'}
         }).then(res=>res.json(res))
         .then(data=>{
-            console.log(data)
+           
             setBuy( buy=>data)
         })
     },[])

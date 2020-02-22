@@ -29,7 +29,7 @@ import AdUpdateCourse from '../Admin/AdUpdateCourse'
            })
            .then(res => res.json(res))
            .then(data =>{
-               console.log(data)
+              
                if(data[0].email === ademail ){
                    setAdmin(true)
                }

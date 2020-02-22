@@ -27,10 +27,13 @@ export default function Login() {
          })
         }).then(res => res.json(res))
           .then(data => {
-              
+           
+             if(data === 'unable to Login'){
+                 return alert(`${data}`)
+             }
              if(data === 'wrong password'){
                  console.log(' Check password')
-                 alert('Check password')
+                return alert('Check password')
              }
              else{
                  if(typeof window !== 'undefined'){

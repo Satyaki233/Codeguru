@@ -27,11 +27,19 @@ export default function Register() {
              password:state.password
          })
         }).then(res => res.json(res))
+        
           .then(data => {
               
+                
+            if(data === 'valid error'){
+                   return alert('please give valid information')
+                }
              if(data === 'wrong password'){
                  console.log(' Check password')
-                 alert('Check password')
+                return alert('Check password')
+             }
+             if(data === 'email already exist'){
+                return alert(`${data}`)
              }
               if(typeof window !== 'undefined'){
                   localStorage.setItem('info-name',(data.username))

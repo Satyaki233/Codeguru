@@ -18,7 +18,7 @@ const AdminRegister = (props) => {
            })
            .then(res => res.json(res))
            .then(data =>{
-               console.log(data)
+              
                 setAdmin( admin => true)
            })
            .catch(err =>{

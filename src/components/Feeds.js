@@ -19,7 +19,7 @@ const Feeds = () => {
       })
       .then(res=>res.json(res))
       .then(data=>{
-          console.log(data)
+        
           setState({...state,allFeeds:data})
       })
       .catch(err=>{console.log(err)})
@@ -56,7 +56,7 @@ const Feeds = () => {
    
     return (
         <div className='container'>
-             <div className='alert alert-warning container'>    
+             <div className='alert alert-warning '>    
                   Please give your comments about your experience...It will help us to make the website much better..
              </div>
              <form className=' bg-dark text-white' style={{margin:'20px',padding:'20px'}}>
@@ -83,7 +83,7 @@ const Feeds = () => {
                 </button>
                 
              </form>
-             <div  className='mx-auto' style={{display:'block',width:'90vw'}}>
+             <div  className='mx-auto' style={{display:'block'}}>
                  {
                      state.allFeeds.map(items=>(
                          <div className='card bg-dark text-white my-2'>
@@ -93,7 +93,9 @@ const Feeds = () => {
                                 </h4>
                                 <p className='card-text' >
                                 {items.feeds}
-                                </p>
+                                </p><br/>
+                     <p>upload time:{items.joined}</p>
+
                             </div>                           
                              
                              <br/>

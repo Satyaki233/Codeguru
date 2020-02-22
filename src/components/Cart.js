@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { Redirect, Link } from 'react-router-dom';
-import PaypalBtn from './PaypalBtn'
-import axios from 'axios'
+
 import DropIn from 'braintree-web-drop-in-react'
 
 const Cart = () => {
@@ -297,13 +296,3 @@ const Cart = () => {
 export default Cart;
 
      
-// {  
-	     
-// 	cart.map(items =>(
-// 		<div>
-	
-// 	<td className='col-lg-4'>{items.title}</td>
-// 	<td className='col-md-6'> {items.price}</td>
-// 	</div>
-// 	))
-// }

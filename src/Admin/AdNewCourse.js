@@ -35,7 +35,7 @@ const AdNewCourse = (e) => {
          })
         .then(res => res.json(res))
         .then(data=>{
-            console.log(data)
+          
             setAdd( add => true)
         })
         .catch(err=>{
@@ -46,7 +46,7 @@ const AdNewCourse = (e) => {
         
     }
 
-    console.log(state.image)
+    
 
     if(!add){
 return (

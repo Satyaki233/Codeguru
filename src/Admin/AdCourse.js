@@ -17,7 +17,7 @@ const AdCourse = (e) => {
 
            }).then(res=>res.json(res))
            .then(data =>{
-               console.log(data)
+            
                setCourse( course=> data);
            })
     },[])
