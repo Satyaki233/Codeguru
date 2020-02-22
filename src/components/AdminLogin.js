@@ -8,7 +8,7 @@ import AdNewCourse from '../Admin/AdNewCourse'
 import AdStatus from '../Admin/AdStatus'
 import AdOrder from '../Admin/AdOrder'
 import AdUpdateCourse from '../Admin/AdUpdateCourse'
- const Admin = (props) => {
+ const AdminLogin = (props) => {
     
     const [admin , setAdmin] = useState(false);
     const [user,setUser] = useState([]);
@@ -77,4 +77,4 @@ import AdUpdateCourse from '../Admin/AdUpdateCourse'
     }
     
 }
-export default Admin;
+export default AdminLogin;

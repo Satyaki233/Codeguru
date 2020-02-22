@@ -28,7 +28,7 @@ const Course = (props) => {
         <div className='jumbotron'>           
             
           <h1> {course.title}</h1><br/>
-          
+            <h3>Price : ${course.price}</h3>
 
         </div>
          <div className='container'>
@@ -40,7 +40,7 @@ const Course = (props) => {
                    style={{width:'300px'}}/>
                  </div>
                  <div className='col-sm-6'>                     
-                    <h1>Price:${course.price}</h1><br/>
+                    
                     <p><h2><strong>Specs:</strong></h2>{course.intro}</p><br/>
                     <button className='btn btn-success m-2' onClick={(e) => {
                         const user = localStorage.getItem('info-id');
