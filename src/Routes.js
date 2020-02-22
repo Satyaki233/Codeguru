@@ -8,6 +8,9 @@ import Course from './components/Course'
 import Dashboard from './components/Dashboard'
 import Cart from './components/Cart'
 import Admin from './components/Admin'
+import Bio from './components/Bio'
+import Docs from './components/Docs'
+import Feeds from './components/Feeds'
 function Routes() {
     return (
         <BrowserRouter>
@@ -20,6 +23,9 @@ function Routes() {
             <Route path='/course/:id' component={Course}/>
             <Route path='/Cart' component={Cart}/>
             <Route path='/Admin/:password' component={Admin}/>
+            <Route path='/Bio' component={Bio}/>
+            <Route path='/Docs' component={Docs}/>
+            <Route path='/Feeds' component={Feeds}/>
 
         </Switch>
         

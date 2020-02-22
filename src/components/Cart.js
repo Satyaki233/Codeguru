@@ -9,7 +9,7 @@ const Cart = () => {
 	var i=0;
 	const [cart,setCart] = useState([]);
 	const [data,setData] = useState({
-		success : false,
+		success :false,
 		clientToken: null,
 		error: '',
 		instance:{},
@@ -65,16 +65,14 @@ const Cart = () => {
 	},[])
 	
 	const showError =()=>{
-		if(data.error !== 'undefined'){
+		if(data.error){
 			return(
-				<div className='container bg-danger text-white'>
+				<div className='alert alert-danger'>
                     <h2>{data.error}</h2>
 				</div>
 			)
 		}
-		else{
-			return null
-		}
+		
 	}
 
 	const buy = ()=>{
@@ -83,7 +81,7 @@ const Cart = () => {
 		.then(data =>{
 			// console.log(data)
 			nonce = data.nonce;
-			console.log(nonce)
+			// console.log(nonce)
 			// console.log(i)
             fetch(`${process.env.REACT_APP_API_KEY}/Braintree/paymentProcess/${user}`,{
 				method: 'POST',
@@ -94,11 +92,11 @@ const Cart = () => {
 				})
 			}).then(res=>res.json(res))
 			.then(data=>{
-				console.log(data)
+				
 			    setData({...data,success:data.success})
 			})
             .catch(err =>{
-				console.log(err)
+				setData({...data,error:err.message})
 			})
            
 			
@@ -127,7 +125,7 @@ const Cart = () => {
 							})
 						}).then(res=>res.json(res))
 						.then(data=>{
-							console.log(data)
+							
 							window.location.reload(false);
 						})
 						.catch(err => {
@@ -143,7 +141,9 @@ const Cart = () => {
 			}
            
 	}
-
+	if(!localStorage.getItem('info-email')){
+		return <Redirect to='/'/>
+	  }
 	 
 
 	const showDropIn=()=>{
@@ -174,7 +174,7 @@ const Cart = () => {
 	  
 	}
 
-	console.log(`error :---${data.error}`)
+	
 
 
 	if(cart.length === 0){
@@ -198,7 +198,7 @@ const Cart = () => {
 			console.log('successfully stored')
 		})
 		.catch(err=>{
-			console.log(err)
+			setData({...data,error:err.message})
 		})
 
 		return(
@@ -208,6 +208,10 @@ const Cart = () => {
 				 Else visit Dash. 
 			</div>
 		)
+	}
+
+	if(user === 'undefined' ){
+		return <Redirect to='/'/>
 	}
 	
 
@@ -262,7 +266,7 @@ const Cart = () => {
 		  })
 		
 	  }}
-	  >Drop</button></td>
+	  ><i class="fas fa-trash"></i></button></td>
 		</tr>
 		
 	   

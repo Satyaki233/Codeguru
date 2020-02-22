@@ -28,7 +28,7 @@ const Course = (props) => {
         <div className='jumbotron'>           
             
           <h1> {course.title}</h1><br/>
-          <h4>{course.intro}</h4>
+          
 
         </div>
          <div className='container'>
@@ -37,11 +37,11 @@ const Course = (props) => {
                    <img  
                    className='courseImg' 
                    src={`http://localhost:8080/${course.image}`}
-                   style={{height:'200px',width:'300px'}}/>
+                   style={{width:'300px'}}/>
                  </div>
                  <div className='col-sm-6'>                     
                     <h1>Price:${course.price}</h1><br/>
-                    <p><h2><strong>Describtion:</strong></h2>{course.describtion}</p><br/>
+                    <p><h2><strong>Specs:</strong></h2>{course.intro}</p><br/>
                     <button className='btn btn-success m-2' onClick={(e) => {
                         const user = localStorage.getItem('info-id');
                          e.preventDefault();
@@ -71,6 +71,10 @@ const Course = (props) => {
                     </Link>
                     </div>
 
+             </div>
+             <div className='row container mx-auto' style={{border:'3px solid black'}}>
+                 <h1 className='mx-auto alert alert-dark my-2'>Describtion:</h1>
+                {course.describtion}
              </div>
          </div>
          

@@ -13,7 +13,7 @@ const Home = (e)=> {
        course :[],
        searchField :''
      })
-    
+       
       const [pic,setPic] = useState([]);
       const [search,setSearch] = useState([]);
       
@@ -47,19 +47,18 @@ const Home = (e)=> {
                 return pics.title.toLowerCase().includes(e.target.value.toLowerCase())
              })
             
-             setSearch( search=>filtercourse )
-          
-             
-          
-
+             setSearch( search=>filtercourse )         
+                      
          
       }
-   
-   
+     if(!localStorage.getItem('info-email')){
+       return <Redirect to='/'/>
+     }
+       
         return (
           <Fragment>
             <div>
-                <Layout title='Home-Page' describtion='This is Home Page'>
+                <Layout title='Codeguru' describtion='This is Home Page'>
                   
                   Welcome: {user}
                  
@@ -87,13 +86,13 @@ const Home = (e)=> {
                      <div className='card-header bg-warning'>
                              {pics.title}
                           </div>
-                     <img className="card-img-top" src={`${process.env.REACT_APP_API_KEY}/${pics.image}`} style={{height:'200px'}} alt="Card image"/>
+                     <img className="card-img-top" src={`${process.env.REACT_APP_API_KEY}/${pics.image}`}  alt="Card image"/>
                          
                           <div className='card-body'>
-                              < p>${pics.price} </p>
-                              <p>{pics.intro}</p>
+                              < p>Price:${pics.price} </p>
+                              
                               <Link className='btn btn-info'  to={`/course/${pics.id}`}>
-                                 See course
+                                 See Product
                               </Link>
                           </div>
                      </div>

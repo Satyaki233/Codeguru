@@ -35,8 +35,8 @@ const AdCourse = (e) => {
                 <th scope="col-3">title</th>
                 <th scope="col-3">intro</th>
                 <th scope="col-3">price</th>
-                <th scope='col-3'>description</th>
                 <th scope='col-3'>image</th>
+                <th scope='col-3'>Describtion</th>
                 <th scope='col-3'>Delete</th>
                 <th scope='col-3'>Upadte</th>
                 </tr>
@@ -71,7 +71,9 @@ const AdCourse = (e) => {
                     })
                  }}
                   >Drop</button></td>
-                  <td><button className='btn btn-warning' >Edit</button></td>
+                  <td><Link 
+                  to={`AdUpdateCourse/${items.id}`}
+                  className='btn btn-warning' >Edit</Link></td>
                     </tr>
                 
                 </tbody>

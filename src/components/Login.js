@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import Intro from './Intro'
+import Bio from './Bio'
 import '../App.css'
 
 export default function Login() {
@@ -13,6 +14,9 @@ export default function Login() {
     const [Log , setLog ] = useState(false)
     const onButtonSubmitLogin = (e) => {
         e.preventDefault();
+        if(state.email === '' || state.password === ''){
+            return alert('Please fill the form')
+        }
         fetch(`${process.env.REACT_APP_API_KEY}/User/login`,{
          method: 'POST',
          headers: {'Content-Type': 'application/json'},
@@ -40,16 +44,24 @@ export default function Login() {
           .catch(err =>console.log(err))
         
     }
-
+    
+    const user = localStorage.getItem('info-email')
    
+    if(user){
+        return <Redirect to='/Home'/>
+    }
 
     if(!Log){
         return (
+          <div>
+            <div>
+            <h1 className='alert alert-dark '>
+                PHONE-HUB
+            </h1>
+        </div>
             <div className='row'>
                 <div className='col-md-6 '>
-                    <h1>
-                      Aboute me 
-                      </h1> 
+                   
                       <Intro id='1'/>   
                     
                 </div>
@@ -84,15 +96,8 @@ export default function Login() {
              </form>
                 </div>
                  
-                   {/* <h1> {JSON.stringify({
-                    
-                    email:state.email,
-                    password:state.password
-                })}<br/>
-                
-                
-                
-                </h1> */}
+               
+            </div>
             </div>
         )
     }

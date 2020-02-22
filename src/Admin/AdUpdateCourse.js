@@ -1,10 +1,7 @@
-import React,{useState} from 'react'
-import '../App.css'
-import 'axios'
-import Axios from 'axios'
-import {Link, Redirect} from 'react-router-dom'
+import React,{useEffect,useState} from 'react'
+import {Redirect,Link} from 'react-router-dom'
 
-const AdNewCourse = (e) => {
+const AdUpdateCourse = (props) => {
     const[state,setState]= useState({
         title:'',
         intro:'',        
@@ -18,19 +15,20 @@ const AdNewCourse = (e) => {
 
 
    
-    
+    const id=props.match.params.id
     
 
     const onButtonSubmit = (e) => {
         e.preventDefault();
+       
         const data= new FormData();
         data.append('title',state.title);
         data.append('intro',state.intro)
         data.append('image', state.image, state.image.name)
         data.append('price',state.price)
         data.append('describtion',state.describtion);
-        fetch(`${process.env.REACT_APP_API_KEY}/course`,{
-         method: 'POST',         
+        fetch(`${process.env.REACT_APP_API_KEY}/course/${id}`,{
+         method: 'PUT',         
          body:data             
          })
         .then(res => res.json(res))
@@ -46,7 +44,7 @@ const AdNewCourse = (e) => {
         
     }
 
-    console.log(state.image)
+    
 
     if(!add){
 return (
@@ -129,4 +127,5 @@ return (
     
 }
 
-export default AdNewCourse
+
+export default AdUpdateCourse;

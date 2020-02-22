@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import Intro from './Intro'
+import Bio from './Bio'
 export default function Register() {
     const [state, setState] = useState({
         username:'',
@@ -9,9 +10,14 @@ export default function Register() {
         
     })
 
+    
+
     const [Log , setLog ] = useState(false)
     const onButtonSubmitLogin = (e) => {
         e.preventDefault();
+        if(state.email === '' || state.password === ''){
+            return alert('Please fill the form')
+        }
         fetch(`${process.env.REACT_APP_API_KEY}/User/register`,{
          method: 'POST',
          headers: {'Content-Type': 'application/json'},
@@ -42,9 +48,15 @@ export default function Register() {
     
     if(!Log){
         return (
+            <div>
+                 <div>
+                     <h1 className='alert alert-dark '>
+                         PHONE-HUB
+                     </h1>
+                 </div>
             <div className='row'>
                 <div className='col-md-6'>
-                <h1>Aboute me</h1>
+                
                 <Intro id='2'/>
                 </div>
                 <div className='col-md-6'>
@@ -86,16 +98,10 @@ export default function Register() {
                  />
              </form>
                 </div>
+                
                  
-                   {/* <h1> {JSON.stringify({
-                    username:state.username,
-                    email:state.email,
-                    password:state.password
-                })}<br/>
-                
-                
-                
-                </h1> */}
+            </div>
+           
             </div>
         )
     }
